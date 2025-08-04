@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Internet Speed Test</title>
+</head>
+<body>
+  <h2>Internet Speed Test</h2>
+  <button onclick="testSpeed()">Start Test</button>
+  <p id="result">Waiting...</p>
+
+  <script>
+    function testSpeed() {
+      const imageUrl = "https://upload.wikimedia.org/wikipedia/commons/3/3f/Fronalpstock_big.jpg"; 
+      const startTime = new Date().getTime();
+      const download = new Image();
+
+      download.onload = function () {
+        const endTime = new Date().getTime();
+        const duration = (endTime - startTime) / 1000; 
+        const imageSize = 5 * 8; 
+        const speed = (imageSize / duration).toFixed(2);
+        document.getElementById("result").innerText = `Your download speed: ${speed} Mbps`;
+      };
+
+      download.onerror = function () {
+        document.getElementById("result").innerText = "Error downloading test file.";
+      };
+
+      // Start download
+      download.src = imageUrl + "?nnn=" + Math.random();
+    }
+  </script>
+</body>
+</html>
